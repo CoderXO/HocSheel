@@ -88,6 +88,7 @@ xcodebuild \
 archive -workspace  ${project_path}/${project_name}.xcworkspace \
 -scheme ${scheme_name} \
 -arch arm64 \
+GCC_OPTIMIZATION_LEVEL=s \
 -configuration ${development_mode} \
 -archivePath ${build_path}/${project_name}.xcarchive -quiet  || exit
 
@@ -141,7 +142,12 @@ if [ $number == 1 ];
     # 将-u 后面的XXX替换成自己的AppleID的账号，-p后面的XXX替换成自己的密码
     altoolPath="/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
     "$altoolPath" --validate-app -f ${exportIpaPath}/${scheme_name}.ipa -u 3364492565@qq.com -p upek-riwm-gvvm-cvep  -t ios --output-format xml
-    "$altoolPath" --upload-app -f ${exportIpaPath}/${scheme_name}.ipa -u  3364492565@qq.com -p upek-riwm-gvvm-cvep -t ios --output-format xml
+#    "$altoolPath" --upload-app -f ${exportIpaPath}/${scheme_name}.ipa -u  3364492565@qq.com -p upek-riwm-gvvm-cvep -t ios --output-format xml
+
+#    xcrun altool --validate-app -f ${exportIpaPath}/${scheme_name}.ipa -t iOS --apiKey 2NHW5QDVB6 --apiIssuer 69a6de8f-64bf-47e3-e053-5b8c7c11a4d1
+
+    xcrun altool --upload-app -f ${exportIpaPath}/${scheme_name}.ipa -t ios --apiKey 4M5WS96ZT4 --apiIssuer 69a6de8f-64bf-47e3-e053-5b8c7c11a4d1 --verbose
+
 else
 
     echo "Place enter the number you want to export ? [ 1:fir 2:蒲公英] "
@@ -169,7 +175,7 @@ else
                 #蒲公英uKey
                 MY_PGY_UK=9aa983244b80d3dae13f4529190bf1be
 
-                curl -F "file=@${exportIpaPath}/${scheme_name}.ipa" -F "uKey=${MY_PGY_UK}" -F "_api_key=${MY_PGY_API_K}" https://qiniu-storage.pgyer.com/apiv1/app/upload
+                curl -F "file=@${exportIpaPath}/${scheme_name}.ipa" -F "uKey=${MY_PGY_UK}" -F "_api_key=${MY_PGY_API_K}" -F "buildInstallType=2" -F "buildPassword=12345678" https://www.pgyer.com/apiv2/app/upload
             fi
 fi
 echo "\n\n"
