@@ -98,6 +98,35 @@ echo '///33333333333'
 fi
 
 
+#### 导出DYSM符号表 #########
+
+#当前路径
+Current_Path="$PWD"
+#脚本打包文件夹路径$(dirname "$PWD")
+FF_path=$(dirname $(dirname "$PWD"))
+#文件夹路径
+Release_DYSM_Path=$FF_path/ReleaseDYSM
+Debug_DYSM_Path=$FF_path/DebugDYSM
+#dYSM路径
+Archive_Path=$Current_Path/build/Teacher.xcarchive/dSYMs
+echo "当前路径:$Current_Path"
+timeNum=$(date "+%Y-%m%d_%H-%M-%S")
+
+Time_path=$Release_DYSM_Path/$timeNum
+
+if [ $number == 1 ];
+then
+mkdir $Release_DYSM_Path
+else
+mkdir $Debug_DYSM_Path
+fi
+
+Time_path=$Debug_DYSM_Path/$timeNum
+mkdir $Time_path
+
+cp -r $Archive_Path $Time_path
+###########################
+
 
 
 
