@@ -108,7 +108,7 @@ FF_path=$(dirname $(dirname "$PWD"))
 Release_DYSM_Path=$FF_path/ReleaseDYSM
 Debug_DYSM_Path=$FF_path/DebugDYSM
 #dYSM路径
-Archive_Path=$Current_Path/build/Teacher.xcarchive/dSYMs
+Archive_Path=$Current_Path/build/$project_name.xcarchive/dSYMs
 echo "当前路径:$Current_Path"
 timeNum=$(date "+%Y-%m%d_%H-%M-%S")
 
